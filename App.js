@@ -1,11 +1,27 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet,View } from 'react-native';
+import Header from './components/Header';
+import StarGamesScreen from './screens/StarGamesScreen';
+import GameScreen from './screens/GameScreen';
+import { useState } from 'react';
 
 export default function App() {
+
+  const [userNumber, setUserNumber] = useState()
+
+  const handleStartGame = (selectedNumber) => {
+    setUserNumber(selectedNumber)
+  }
+
+  let content = <StarGamesScreen onStartGame={handleStartGame}/>
+  if (userNumber) {
+    content = <GameScreen/>
+  }
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Header title={"Adivina el numero"} />
+      {content}
     </View>
   );
 }
@@ -14,7 +30,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
