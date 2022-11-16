@@ -5,7 +5,7 @@ import Colors from '../constants/Colors'
 import Font from '../constants/Font'
 import { useFonts } from 'expo-font'
 
-const GameScreen = () => {
+const GameScreen = ({handleResult}) => {
 
     const [loaded] = useFonts({
         Roboto: require('../assets/fonts/Roboto-Bold.ttf')
@@ -28,11 +28,13 @@ const GameScreen = () => {
             <Text style={styles.text}>{currentGuess}</Text>
             <Card newStyles={styles.buttonContainer}>
                 <Pressable
-                    style={styles.buttons}>
+                    style={styles.buttons}
+                    onPress={() => handleResult ('lower', currentGuess)}>
                     <Text style={styles.text}>Menor</Text>
                 </Pressable>
                 <Pressable
-                    style={styles.buttons}>
+                    style={styles.buttons}
+                    onPress={() => handleResult ('greater', currentGuess)}>
                     <Text style={styles.text}>Mayor</Text>
                 </Pressable>
             </Card>
@@ -54,13 +56,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginTop: 20,
-        width: 300,
+        width: '85%',
     },
 
     buttons: {
         backgroundColor: Colors.primary,
         height: 35,
-        width: 70,
+        width: '30%',
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 10,
